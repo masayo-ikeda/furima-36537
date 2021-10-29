@@ -29,8 +29,9 @@
 | rank_id            | integer    | null: false                    |
 | postage_id         | integer    | null: false                    |
 | area_id            | integer    | null: false                    |
-| scheduled_id       | string     | null: false                    |
+| scheduled_id       | integer    | null: false                    |
 | price              | integer    | null: false                    |
+
 ### Association
 
 - belongs_to :user
