@@ -24,7 +24,7 @@
 |--------------------|------------|--------------------------------|
 | user               | references | null: false, foreign_key: true |
 | item               | string     | null: false                    |
-| info               | string     | null: false                    |
+| info               | text       | null: false                    |
 | price              | integer    | null: false                    |
 | seller_id          | integer    | null: false                    |
 | category_id        | integer    | null: false                    |
@@ -48,11 +48,13 @@
 
 - belongs_to :user
 - has_one :address
+- belongs_to :item
 
-## address table
+## addresses table
 
 | Column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
+| order       | references | null: false, foreign_key: true |
 | code        | string     | null: false                    |
 | area_id     | integer    | null: false                    |
 | city        | string     | null: false                    |
