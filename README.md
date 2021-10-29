@@ -25,13 +25,12 @@
 | user               | references | null: false, foreign_key: true |
 | item               | string     | null: false                    |
 | info               | text       | null: false                    |
-| price              | integer    | null: false                    |
-| seller_id          | integer    | null: false                    |
 | category_id        | integer    | null: false                    |
 | rank_id            | integer    | null: false                    |
 | postage_id         | integer    | null: false                    |
 | area_id            | integer    | null: false                    |
-
+| scheduled_id       | string     | null: false                    |
+| price              | integer    | null: false                    |
 ### Association
 
 - belongs_to :user

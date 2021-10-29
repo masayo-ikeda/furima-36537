@@ -16,7 +16,7 @@
                 <mxCell id="6" value="（商品情報）&#10;顧客番号　user&#10;商品名　item&#10;商品説明　info&#10;プライス　price&#10;出品者　seller_id&#10;カテゴリー　category_id&#10;商品状態　rank_id&#10;配送料負担　postage_id&#10;発送先の地域　area_id" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="5" vertex="1">
                     <mxGeometry y="30" width="170" height="170" as="geometry"/>
                 </mxCell>
-                <mxCell id="14" value="addressテーブル" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
+                <mxCell id="14" value="addressesテーブル" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
                     <mxGeometry x="360" y="280" width="160" height="170" as="geometry"/>
                 </mxCell>
                 <mxCell id="15" value="（配送先住所）&#10;郵便番号　code&#10;都道府県　prefectures&#10;市町村　city&#10;番地　number&#10;建物名 building&#10;電話番号　tel" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="14" vertex="1">
