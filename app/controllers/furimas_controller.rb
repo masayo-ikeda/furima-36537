@@ -1,10 +1,9 @@
 class FurimasController < ApplicationController
   
-  def index
+  def 
   end
 
-  def new
-  end
+
     
   end
 

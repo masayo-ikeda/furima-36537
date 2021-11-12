@@ -1,21 +1,33 @@
 class Item < ApplicationRecord
-  belongs_to :user
-  has_one :order
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :rank
+  belongs_to :postage
+  belongs_to :area
+  belongs_to :scheduled
 
-  validates :user, presence: true
+  belongs_to :user
+  # has_one :order
+  has_one_attached :image
+  # validates :user, presence: true
   validates :item, presence: true
   validates :info, presence: true  
-  validates :category_id, presence: true
-  validates :title, presence: true
-  validates :catch_copy, presence: true
-  validates :rank_id, presence: true  
-  validates :postage_id, presence: true
-  validates :area_id, presence: true
-  validates :scheduled_id, presence: true
-  validates :price, presence: true  
+  validates :category_id, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :rank_id, numericality: { other_than: 1, message: "can't be blank" }   
+  validates :postage_id, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :area_id, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :scheduled_id, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :price, numericality: { message: "can't be blank" } 
+  validates_inclusion_of :price, in:300..9999999 
+  # , message: "Price is not included in the list"
   validates :image, presence: true
-  end
+  # validates :genre_id, numericality: { other_than: 1, message: "can't be blank" }
+  with_options presence: true, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' } do
+    validates :price
 
+  end
+  
+  end
 #   ## items table
 # userテーブルとorderテーブルのbelong_to,has_one README見てから先に書きました
 # | Column             | Type       | Options                        |
