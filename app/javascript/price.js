@@ -9,7 +9,6 @@ priceInput.addEventListener("input", () => {
   
   const profitNumber = document.getElementById("profit")
   
-  console.log(addTaxDom.innerHTML) 
   profitNumber.innerHTML = (Math.floor(inputValue - addTaxDom.innerHTML));
 
 })
