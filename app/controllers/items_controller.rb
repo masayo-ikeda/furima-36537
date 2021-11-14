@@ -3,12 +3,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order("created_at DESC")
-    # Qiita参照
-    # @items = Item.find(params[:name_id])
-    # @items_img = @items.item_imgs.find(params[:id])
-    # @sending_destination = current_user.sending_destination
-    # prefecture = Prefecture.data.select{|o| o[:id] == @sending_destination.prefecture_id}.first
-    # @prefectureName = prefecture[:name]
   end
 
   def new
