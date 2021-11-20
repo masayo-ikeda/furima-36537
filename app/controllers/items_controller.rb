@@ -1,13 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :update, :edit]
   #authenticate_user!メソッドはログインに必要なデバイス
-  # プロトスペース
-  # before_action :set_prototype, except: [:index, :new, :create]
-  #deviseのメソッド
   #ユーザがログインしているかどうかを確認し、ログインしていない場合はユーザをログインページにリダイレクトする
-  # before_action :contributor_confirmation, only: [:edit, :update, :destroy]
-  before_action :set_item, only: [:show]
-
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :login_confirmation, only: [:edit, :update, :destroy]
+  
   def index
     @items = Item.order("created_at DESC")
   end
@@ -28,13 +25,25 @@ class ItemsController < ApplicationController
   def show
   end
 
-  # def edit
-  #   @item = Item.find(params[:id])
-  # end
+  def login_confirmation
+    redirect_to root_path unless current_user == @item.user
+  end
+
+  def edit
+  end
+
+    def update
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit
+    end
+  end
 
   # def destroy
   #   @item = Item.find(params[:id])
   # end
+  
   private
 
   def item_params
