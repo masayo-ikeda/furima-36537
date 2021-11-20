@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   #authenticate_user!メソッドはログインに必要なデバイス
   #ユーザがログインしているかどうかを確認し、ログインしていない場合はユーザをログインページにリダイレクトする
   before_action :set_item, only: [:show, :edit, :update]
-  before_action :login_confirmation, only: [:edit, :update, :destroy]
+  before_action :login_confirmation, only: [:edit, :update]
   
   def index
     @items = Item.order("created_at DESC")
@@ -25,10 +25,6 @@ class ItemsController < ApplicationController
   def show
   end
 
-  def login_confirmation
-    redirect_to root_path unless current_user == @item.user
-  end
-
   def edit
   end
 
@@ -43,7 +39,7 @@ class ItemsController < ApplicationController
   # def destroy
   #   @item = Item.find(params[:id])
   # end
-  
+
   private
 
   def item_params
@@ -52,5 +48,9 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def login_confirmation
+    redirect_to root_path unless current_user == @item.user
   end
 end
