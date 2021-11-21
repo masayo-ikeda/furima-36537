@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :update, :edit]
+  before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy]
   #authenticate_user!メソッドはログインに必要なデバイス
   #ユーザがログインしているかどうかを確認し、ログインしていない場合はユーザをログインページにリダイレクトする
   before_action :set_item, only: [:show, :edit, :update, :destroy]
