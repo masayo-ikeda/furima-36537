@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy]
-  #authenticate_user!メソッドはログインに必要なデバイス
-  #ユーザがログインしているかどうかを確認し、ログインしていない場合はユーザをログインページにリダイレクトする
+  # authenticate_user!メソッドはログインに必要なデバイス
+  # ユーザがログインしているかどうかを確認し、ログインしていない場合はユーザをログインページにリダイレクトする
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :login_confirmation, only: [:edit, :update, :destroy]
-  
+
   def index
-    @items = Item.order("created_at DESC")
+    @items = Item.order('created_at DESC')
   end
 
   def new
@@ -26,9 +26,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    redirect_to root_path if @item.order.present?
   end
 
-    def update
+  def update
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
@@ -47,7 +48,8 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:item, :info, :category_id, :image, :rank_id, :postage_id, :area_id, :scheduled_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:item, :info, :category_id, :image, :rank_id, :postage_id, :area_id, :scheduled_id,
+                                 :price).merge(user_id: current_user.id)
   end
 
   def set_item
