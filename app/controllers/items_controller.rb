@@ -27,8 +27,9 @@ class ItemsController < ApplicationController
 
   def edit
     redirect_to root_path if @item.order.present?
+    # 購入済ならTOPへ遷移するという意味
   end
-
+  
   def update
     if @item.update(item_params)
       redirect_to item_path(@item)
@@ -36,8 +37,9 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
-
+  
   def destroy
+    redirect_to root_path if @item.order.present?
     if @item.destroy
       redirect_to root_path
     else
