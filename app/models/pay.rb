@@ -6,10 +6,11 @@ class Pay
     validates :user_id
     validates :code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid' }
     validates :area_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :city, presence: true
-    validates :number, presence: true
+    validates :city
+    validates :number
     validates :tel, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Include hyphen(-)' }
-    validates :token, presence: true
+    validates :item_id
+    validates :token
   end
 
   def save

@@ -1,18 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe Pay, type: :model do
-  describe '購入情報と住所情報の保存' do
     before do
       user = FactoryBot.create(:user)
-      @pay = FactoryBot.build(:pay, user_id: user.id)
+      item = FactoryBot.create(:item)
+      # order = FactoryBot.create(:order)
+      # @pay = FactoryBot.build(:pay, user_id: user.id, item_id: item.id, order_id: order.id)
+      @pay = FactoryBot.build(:pay, user_id: user.id, item_id: item.id)
     end
-
+  
+  describe '購入情報と住所情報の保存' do
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@pay).to be_valid
       end
-
       it '住所/建物名「building」は空でも保存できること' do
+        @pay.building = ''
         expect(@pay).to be_valid
       end
     end
@@ -60,18 +63,33 @@ RSpec.describe Pay, type: :model do
         @pay.valid?
         expect(@pay.errors.full_messages).to include 'Tel is invalid. Include hyphen(-)'
       end
+      it '電話番号「tel」が9桁以下では登録できない' do
+        @pay.tel = '12345'
+        @pay.valid?
+        expect(@pay.errors.full_messages).to include 'Tel is invalid. Include hyphen(-)'
+      end
+      it '電話番号「tel」が12桁以上では登録できない' do
+        @pay.tel = '123456789012345'
+        @pay.valid?
+        expect(@pay.errors.full_messages).to include 'Tel is invalid. Include hyphen(-)'
+      end
       it '電話番号「tel」が全角では登録できない' do
         @pay.tel = '１２３４５６７８９１０'
         @pay.valid?
         expect(@pay.errors.full_messages).to include 'Tel is invalid. Include hyphen(-)'
       end
       it 'お客様顧客「user」は購入の時、user登録完了者でなければ購入と支払いができない' do
-        @pay.user_id = nil
+        @pay.user_id = ""
         @pay.valid?
-        expect(@pay.errors.full_messages)
+        expect(@pay.errors.full_messages).to include "User can't be blank"
       end
-      it 'クレジット情報「token」が空では購入と支払いができないこと' do
-        @pay.token = ''
+      it 'お客様顧客「item」は購入の時、商品選択していなければ購入と支払いができない' do
+        @pay.item_id = ""
+        @pay.valid?
+        expect(@pay.errors.full_messages).to include "Item can't be blank"
+      end
+      it 'クレジット情報「token」が空では購入と支払いができない' do
+        @pay.token = ""
         @pay.valid?
         expect(@pay.errors.full_messages).to include "Token can't be blank"
       end
