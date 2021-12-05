@@ -5,7 +5,9 @@ class OrdersController < ApplicationController
   def index
     @pay = Pay.new
     redirect_to root_path if current_user == @item.user
-    redirect_to root_path unless @item.order.present?
+    # ログインしてる人と@item投稿した人が一致しているならばTOPページへ行く
+    redirect_to root_path if @item.order.present?
+    # 購入履歴が存在しているならば、購入されてるならばTOPページへいく
   end
 
   def create
@@ -21,8 +23,10 @@ class OrdersController < ApplicationController
 
   private
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
+  # ネストしてあるのでparams[:item_id]になる
+
 
   def order_params
     params.require(:pay).permit(:code, :area_id, :city, :number, :building, :tel).merge(user_id: current_user.id,
